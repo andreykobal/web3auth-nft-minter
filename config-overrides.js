@@ -9,13 +9,15 @@ module.exports = function override(config, env) {
         "http": require.resolve("stream-http"),
         "https": require.resolve("https-browserify"),
         "zlib": require.resolve("browserify-zlib"),
-        "stream": require.resolve("stream-browserify")
+        "stream": require.resolve("stream-browserify"),
+        "buffer": require.resolve("buffer/")  // <- Add this line
     };
 
-    // Provide the process shim
+    // Provide the process shim and Buffer
     config.plugins.push(
         new webpack.ProvidePlugin({
             process: 'process/browser',
+            Buffer: ['buffer', 'Buffer']  // <- Add this line
         })
     );
 
